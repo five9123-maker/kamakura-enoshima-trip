@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>가마쿠라 → 에노시마 여행 일정</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --surface2: #f0f2f5;
+      --border: #e4e6eb;
+      --text: #1a1a2e;
+      --text2: #555770;
+      --text3: #888aaa;
+      --accent: #4f46e5;
+      --accent-bg: #eef2ff;
+      --food: #f59e0b;
+      --food-bg: #fffbeb;
+      --sight: #10b981;
+      --sight-bg: #ecfdf5;
+      --transport: #6366f1;
+      --transport-bg: #eef2ff;
+      --anime: #ec4899;
+      --anime-bg: #fdf2f8;
+      --sunset: #f97316;
+      --sunset-bg: #fff7ed;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --line: #d1d5db;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f1a;
+        --surface: #1a1a2e;
+        --surface2: #22223a;
+        --border: #2e2e4a;
+        --text: #e8e8f0;
+        --text2: #a0a0c0;
+        --text3: #606080;
+        --accent: #818cf8;
+        --accent-bg: #1e1e3f;
+        --food-bg: #2a2010;
+        --sight-bg: #0d2520;
+        --transport-bg: #1e1e3f;
+        --anime-bg: #2a1020;
+        --sunset-bg: #2a1505;
+        --shadow: 0 2px 12px rgba(0,0,0,0.4);
+        --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+        --line: #2e2e4a;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f2447 40%, #1a1040 100%);
+      color: #fff;
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E") repeat;
+    }
+    .header-inner { position: relative; max-width: 680px; margin: 0 auto; }
+    .header-date {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      padding: 4px 16px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .header h1 .arrow { color: #fbbf24; margin: 0 6px; }
+    .header-sub {
+      font-size: 15px;
+      opacity: 0.75;
+      margin-bottom: 28px;
+    }
+
+    /* ── Summary pills ── */
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .pill {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Key banner ── */
+    .key-banner {
+      background: rgba(249, 115, 22, 0.2);
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Main content ── */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 16px 0;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 20px;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 56px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--line);
+      border-radius: 2px;
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card:last-child { margin-bottom: 0; }
+
+    /* ── Dot on timeline ── */
+    .card::before {
+      content: attr(data-icon);
+      position: absolute;
+      left: -48px;
+      top: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border: 2px solid var(--bg);
+      box-shadow: var(--shadow);
+      background: var(--surface);
+    }
+
+    /* ── Category color strip ── */
+    .card-food    { border-left: 4px solid var(--food); }
+    .card-sight   { border-left: 4px solid var(--sight); }
+    .card-transport { border-left: 4px solid var(--transport); }
+    .card-anime   { border-left: 4px solid var(--anime); }
+    .card-sunset  { border-left: 4px solid var(--sunset); border-left-width: 4px; }
+    .card-home    { border-left: 4px solid var(--text3); }
+
+    /* ── Special: sunset ── */
+    .card-sunset {
+      background: linear-gradient(135deg, var(--sunset-bg), var(--surface));
+      border-color: rgba(249,115,22,0.3);
+    }
+    .card-sunset .card-title { color: var(--sunset); }
+
+    /* ── Card internals ── */
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .card-meta { flex: 1; }
+    .card-time {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text3);
+      margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .card-badge {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .badge-food       { background: var(--food-bg);      color: var(--food); }
+    .badge-sight      { background: var(--sight-bg);     color: var(--sight); }
+    .badge-transport  { background: var(--transport-bg); color: var(--transport); }
+    .badge-anime      { background: var(--anime-bg);     color: var(--anime); }
+    .badge-sunset     { background: var(--sunset-bg);    color: var(--sunset); }
+    .badge-home       { background: var(--surface2);     color: var(--text3); }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    /* ── Tips ── */
+    .tips {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text2);
+      background: var(--surface2);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+    }
+    .tip-icon { flex-shrink: 0; font-size: 14px; }
+
+    /* ── Choice chips ── */
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .choice.pick {
+      background: var(--sight-bg);
+      border-color: var(--sight);
+      color: var(--sight);
+    }
+
+    /* ── Duration badge ── */
+    .duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--text3);
+      background: var(--surface2);
+      border-radius: 999px;
+      padding: 3px 10px;
+      margin-top: 8px;
+    }
+
+    /* ── Alert ── */
+    .alert {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--sunset);
+      margin-top: 10px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 48px 16px 0;
+      font-size: 13px;
+      color: var(--text3);
+    }
+    .footer strong { color: var(--text2); }
+
+    /* ── Map link ── */
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      background: var(--accent-bg);
+      border-radius: 999px;
+      padding: 5px 14px;
+      border: 1px solid rgba(99,102,241,0.2);
+      transition: opacity 0.15s;
+    }
+    .map-link:hover { opacity: 0.75; }
+
+    /* ── Sunset glow animation ── */
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.0), var(--shadow); }
+      50% { box-shadow: 0 0 0 6px rgba(249,115,22,0.15), var(--shadow-lg); }
+    }
+    .card-sunset { animation: glow 3s ease-in-out infinite; }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .header { padding: 36px 16px 32px; }
+      .timeline { padding-left: 48px; }
+      .timeline::before { left: 16px; }
+      .card::before { left: -43px; width: 32px; height: 32px; font-size: 16px; }
+      .card { padding: 16px; }
+      .card-title { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-date">📅 일정 시작 14:00</div>
+    <h1>가마쿠라<span class="arrow">→</span>슬램덩크<span class="arrow">→</span>에노시마</h1>
+    <p class="header-sub">오후 황금 루트 · 노을 집중 코스</p>
+
+    <div class="summary">
+      <div class="pill">🍔 점심</div>
+      <div class="pill">⛩️ 가마쿠라 맛보기</div>
+      <div class="pill">🚃 에노덴</div>
+      <div class="pill">🏀 슬램덩크 건널목</div>
+      <div class="pill">🌅 에노시마 노을</div>
+    </div>
+
+    <div class="key-banner">
+      🔑 핵심 — 가마쿠라 짧게 → 슬램덩크 스팟 → 에노시마 노을 집중
+    </div>
+  </div>
+</div>
+
+<!-- ══ TIMELINE ══ -->
+<div class="content">
+  <p class="section-label">오늘의 일정</p>
+
+  <div class="timeline">
+
+    <!-- 1. 점심 -->
+    <div class="card card-food" data-icon="🍔">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">14:00 — 14:50 · 50분</div>
+          <div class="card-title">Nagisa no Wood-Fired Hamburgers</div>
+        </div>
+        <span class="card-badge badge-food">🍽️ 식사</span>
+      </div>
+      <p class="card-desc">
+        장작 화덕에서 구운 패티로 유명한 로컬 맛집. 가마쿠라 관광 시작 전 든든하게 채우기.
+        바닷바람을 맞으며 먹는 수제 버거가 하이라이트.
+      </p>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">⏱️</span> 대기 있을 수 있으니 도착하자마자 주문</div>
+        <div class="tip"><span class="tip-icon">📍</span> 가마쿠라역 근처 — 다음 스팟과 동선 연결 최적</div>
+      </div>
+    </div>
+
+    <!-- 2. 가마쿠라 -->
+    <div class="card card-sight" data-icon="⛩️">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">15:00 — 15:50 · 50분</div>
+          <div class="card-title">가마쿠라 핵심 관광 (택 1)</div>
+        </div>
+        <span class="card-badge badge-sight">🗺️ 관광</span>
+      </div>
+      <p class="card-desc">
+        에노시마 노을 타임이 최우선이므로 가마쿠라는 딱 한 곳만. 아래 두 옵션 중 선택.
+      </p>
+      <div class="choices">
+        <div class="choice pick">⛩️ 쓰루가오카 하치만구 — 웅장한 계단 & 본궁, 인스타 감성</div>
+        <div class="choice">🛍️ 코마치 거리 — 간식 + 기념품 쇼핑, 느긋한 산책</div>
+      </div>
+      <div class="tips" style="margin-top:12px;">
+        <div class="tip"><span class="tip-icon">⚠️</span> 15:50 엄수 — 늦어지면 슬램덩크 스팟 30분 압박</div>
+        <div class="tip"><span class="tip-icon">💡</span> 두 곳 다 가마쿠라역에서 도보권</div>
+      </div>
+    </div>
+
+    <!-- 3. 에노덴 이동 #1 -->
+    <div class="card card-transport" data-icon="🚃">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">16:00 — 16:15 · 15분</div>
+          <div class="card-title">에노덴 — 가마쿠라코코마에역으로</div>
+        </div>
+        <span class="card-badge badge-transport">🚃 이동</span>
+      </div>
+      <p class="card-desc">
+        가마쿠라역에서 에노덴(에노시마 전철)을 타고 가마쿠라코코마에역으로 이동.
+        바다 옆을 달리는 에노덴 자체가 포토 스팟.
+      </p>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">🎫</span> Suica / PASMO 사용 가능 · 창가 좌석 추천 (바다 뷰)</div>
+        <div class="tip"><span class="tip-icon">📍</span> 가마쿠라역 → 가마쿠라코코마에역 · 약 5정거장</div>
+      </div>
+    </div>
+
+    <!-- 4. 슬램덩크 -->
+    <div class="card card-anime" data-icon="🏀">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">16:15 — 16:45 · 30분</div>
+          <div class="card-title">슬램덩크 건널목 + 해변 산책</div>
+        </div>
+        <span class="card-badge badge-anime">🏀 성지 순례</span>
+      </div>
+      <p class="card-desc">
+        《슬램덩크》 오프닝 그 장면! 가마쿠라코코마에역 바로 앞 건널목에서 바다를 배경으로 사진.
+        모래사장도 5분 거리 — 잠깐 내려가서 파도 소리 들으며 숨 고르기.
+      </p>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">📸</span> 건널목 사진은 열차 통과 타이밍에 맞춰 — 배경이 살아남</div>
+        <div class="tip"><span class="tip-icon">🌊</span> 해변은 건널목에서 도보 3분 · 샌들 없어도 OK</div>
+        <div class="tip"><span class="tip-icon">⏱️</span> 30분 컷 엄수 — 16:45 출발 지켜야 노을 타임 안전</div>
+      </div>
+      <div class="alert">
+        🚨 16:45 넘기면 에노시마 노을 타임 위태로움 — 이 스팟이 타임킬러 주의!
+      </div>
+    </div>
+
+    <!-- 5. 에노덴 이동 #2 -->
+    <div class="card card-transport" data-icon="🚃">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">16:45 — 17:00 · 15분</div>
+          <div class="card-title">에노덴 — 에노시마역으로</div>
+        </div>
+        <span class="card-badge badge-transport">🚃 이동</span>
+      </div>
+      <p class="card-desc">
+        가마쿠라코코마에역에서 에노시마역으로 이동. 짧은 구간이지만 드라마틱한 해안선 구간.
+      </p>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">📍</span> 에노시마역 하차 후 도보로 에노시마 섬 입구까지 약 10분</div>
+      </div>
+    </div>
+
+    <!-- 6. 에노시마 관광 -->
+    <div class="card card-sight" data-icon="🏝️">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">17:00 — 18:40 · 1시간 40분</div>
+          <div class="card-title">에노시마 관광</div>
+        </div>
+        <span class="card-badge badge-sight">🗺️ 관광</span>
+      </div>
+      <p class="card-desc">
+        에노시마 섬을 순서대로 탐방. 노을 전까지의 황금 시간대.
+      </p>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">🛍️</span> <strong>벤텐나카미세 상점거리</strong> — 간식 & 기념품 쇼핑 (입구 ~ 15분)</div>
+        <div class="tip"><span class="tip-icon">⛩️</span> <strong>에노시마 신사</strong> — 본궁까지 계단 순례 (20~30분)</div>
+        <div class="tip"><span class="tip-icon">🔭</span> <strong>전망 포인트</strong> — 후지산 조망 스팟, 맑으면 황금빛 후지 (30분)</div>
+        <div class="tip"><span class="tip-icon">💡</span> 이 순서대로 돌면 노을 포인트까지 자연스럽게 연결됨</div>
+      </div>
+    </div>
+
+    <!-- 7. 노을 ★★★ -->
+    <div class="card card-sunset" data-icon="🌅">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">18:40 — 19:10 · 30분</div>
+          <div class="card-title">에노시마 노을 감상 ★</div>
+        </div>
+        <span class="card-badge badge-sunset">🌅 핵심</span>
+      </div>
+      <p class="card-desc">
+        오늘 일정 전체의 목적지. 에노시마 서쪽 끝에서 태평양으로 지는 노을은
+        날씨만 받쳐주면 잊을 수 없는 장면. 30분은 여기에 집중.
+      </p>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">📍</span> 에노시마 서쪽 끝 절벽 (치고가후치 洞窟 방면) — 탁 트인 서향 전망</div>
+        <div class="tip"><span class="tip-icon">📸</span> 실루엣 사진은 해 지기 5분 전이 가장 드라마틱</div>
+        <div class="tip"><span class="tip-icon">🌤️</span> 흐린 날도 노을빛 하늘은 나옴 — 포기하지 말 것</div>
+        <div class="tip"><span class="tip-icon">🌡️</span> 해 지면 바람이 차가워짐 — 걸칠 것 준비</div>
+      </div>
+      <div class="alert">
+        🌅 이 타임이 오늘의 클라이맥스 — 앞 일정이 밀려도 18:40 이전엔 반드시 도착!
+      </div>
+    </div>
+
+    <!-- 8. 귀가 -->
+    <div class="card card-home" data-icon="🏠">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-time">19:30 이후</div>
+          <div class="card-title">에노시마 → 귀가</div>
+        </div>
+        <span class="card-badge badge-home">🚃 귀가</span>
+      </div>
+      <p class="card-desc">
+        노을 감상 후 에노시마역 또는 가타세에노시마역에서 귀가.
+        가는 길에 에노시마 역 근처 저녁 식사도 좋은 선택.
+      </p>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">🚉</span> 에노시마역(에노덴) 또는 가타세에노시마역(오다큐선) — 목적지 따라 선택</div>
+        <div class="tip"><span class="tip-icon">🍣</span> 에노시마역 주변 저녁 식사 — 해산물 덮밥 추천</div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer">
+    <p><strong>총 소요 약 5~6시간</strong> · 14:00 출발 기준 노을 타임까지 여유 있음</p>
+    <p style="margin-top:8px; font-size:12px;">맑은 날 기준 · 에노덴 혼잡 시 5~10분 여유 추가</p>
+  </div>
+
+</div><!-- /content -->
+
+</body>
+</html>
