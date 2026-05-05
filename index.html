@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>가마쿠라 → 에노시마 여행 일정</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root {
       --bg: #f7f8fa;
@@ -423,6 +424,29 @@
     }
     .card-sunset { animation: glow 3s ease-in-out infinite; }
 
+    /* ── Map ── */
+    #map {
+      height: 400px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+    .map-marker {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
     /* ── Dinner grid ── */
     .dinner-grid {
       display: grid;
@@ -484,6 +508,9 @@
 
 <!-- ══ TIMELINE ══ -->
 <div class="content">
+  <p class="section-label">동선 지도</p>
+  <div id="map"></div>
+
   <p class="section-label">오늘의 일정</p>
 
   <div class="timeline">
@@ -862,5 +889,41 @@
 
 </div><!-- /content -->
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([35.31, 139.52], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  function makeIcon(num) {
+    return L.divIcon({
+      className: '',
+      html: '<div class="map-marker">' + num + '</div>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16]
+    });
+  }
+
+  const spots = [
+    { num: '①', latlng: [35.3107, 139.5503], name: '① Nagisa Hamburgers', desc: '14:00 — 점심' },
+    { num: '②', latlng: [35.3256, 139.5565], name: '② 쓰루가오카 하치만구', desc: '15:00 — 가마쿠라 관광' },
+    { num: '③', latlng: [35.3065, 139.4975], name: '③ 가마쿠라코코마에역 (슬램덩크)', desc: '16:15 — 성지 순례' },
+    { num: '④', latlng: [35.3004, 139.4790], name: '④ 에노시마', desc: '17:00 — 관광 & 노을' }
+  ];
+
+  spots.forEach(function(s) {
+    L.marker(s.latlng, { icon: makeIcon(s.num) })
+      .addTo(map)
+      .bindPopup('<strong>' + s.name + '</strong><br>' + s.desc);
+  });
+
+  L.polyline(
+    spots.map(function(s) { return s.latlng; }),
+    { color: '#4f46e5', weight: 2.5, dashArray: '6 6', opacity: 0.8 }
+  ).addTo(map);
+</script>
 </body>
 </html>
