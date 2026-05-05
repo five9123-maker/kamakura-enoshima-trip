@@ -423,6 +423,22 @@
     }
     .card-sunset { animation: glow 3s ease-in-out infinite; }
 
+    /* ── Dinner grid ── */
+    .dinner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .dinner-card {
+      overflow: hidden;
+    }
+    .dinner-card::before { content: none; }
+    .dinner-card .card-img { height: 140px; }
+    @media (max-width: 600px) {
+      .dinner-grid { grid-template-columns: 1fr; }
+      .dinner-card .card-img { height: 180px; }
+    }
+
     /* ── Responsive ── */
     @media (max-width: 480px) {
       .header { padding: 36px 16px 32px; }
@@ -759,6 +775,83 @@
     </div>
 
   </div><!-- /timeline -->
+
+  <!-- ══ 저녁 추천 메뉴 ══ -->
+  <div style="margin-top: 40px;">
+    <p class="section-label">저녁 추천 메뉴</p>
+    <div class="dinner-grid">
+
+      <!-- 시라스동 -->
+      <div class="card card-food dinner-card">
+        <img
+          class="card-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Shirasu_don.jpg/800px-Shirasu_don.jpg"
+          alt="시라스동"
+          loading="lazy"
+        />
+        <p class="img-credit">© Wikimedia Commons</p>
+        <div class="card-header" style="margin-bottom:8px;">
+          <div class="card-meta">
+            <div class="card-title" style="font-size:15px;">시라스동
+              <span style="display:block;font-size:12px;font-weight:400;color:var(--text3);">しらす丼</span>
+            </div>
+          </div>
+          <span class="card-badge badge-food">에노시마</span>
+        </div>
+        <p class="card-desc" style="font-size:13px;">에노시마 명물. 생시라스+밥으로 바다의 맛 그대로.</p>
+        <div class="tips">
+          <div class="tip"><span class="tip-icon">🏪</span> 토비초 (とびっちょ) 에노시마본점</div>
+          <div class="tip"><span class="tip-icon">💴</span> ~1,500엔</div>
+          <div class="tip"><span class="tip-icon">🕐</span> 11:00~21:00</div>
+        </div>
+      </div>
+
+      <!-- 해산물 정식 -->
+      <div class="card card-food dinner-card">
+        <img
+          class="card-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Sashimi_for_sale.jpg/800px-Sashimi_for_sale.jpg"
+          alt="해산물 정식"
+          loading="lazy"
+        />
+        <p class="img-credit">© Wikimedia Commons</p>
+        <div class="card-header" style="margin-bottom:8px;">
+          <div class="card-meta">
+            <div class="card-title" style="font-size:15px;">해산물 정식</div>
+          </div>
+          <span class="card-badge badge-food">섬 입구</span>
+        </div>
+        <p class="card-desc" style="font-size:13px;">에노시마 섬 입구 해산물 레스토랑. 사시미·튀김 정식.</p>
+        <div class="tips">
+          <div class="tip"><span class="tip-icon">📍</span> 에노시마 섬 입구</div>
+          <div class="tip"><span class="tip-icon">💴</span> ~2,000엔</div>
+        </div>
+      </div>
+
+      <!-- 라멘 -->
+      <div class="card card-food dinner-card">
+        <img
+          class="card-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Shoyu_ramen%2C_at_Kasukabe_Station_%282014.05.05%29_2.jpg/800px-Shoyu_ramen%2C_at_Kasukabe_Station_%282014.05.05%29_2.jpg"
+          alt="라멘"
+          loading="lazy"
+        />
+        <p class="img-credit">© Wikimedia Commons</p>
+        <div class="card-header" style="margin-bottom:8px;">
+          <div class="card-meta">
+            <div class="card-title" style="font-size:15px;">라멘</div>
+          </div>
+          <span class="card-badge badge-food">후지사와</span>
+        </div>
+        <p class="card-desc" style="font-size:13px;">후지사와역 근처. 가볍게 마무리하기 좋은 한 그릇.</p>
+        <div class="tips">
+          <div class="tip"><span class="tip-icon">📍</span> 후지사와역 근처</div>
+          <div class="tip"><span class="tip-icon">💴</span> ~1,000엔</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ══ FOOTER ══ -->
   <div class="footer">
