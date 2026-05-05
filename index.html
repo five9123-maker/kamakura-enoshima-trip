@@ -209,7 +209,7 @@
     .card-sight   { border-left: 4px solid var(--sight); }
     .card-transport { border-left: 4px solid var(--transport); }
     .card-anime   { border-left: 4px solid var(--anime); }
-    .card-sunset  { border-left: 4px solid var(--sunset); border-left-width: 4px; }
+    .card-sunset  { border-left: 4px solid var(--sunset); }
     .card-home    { border-left: 4px solid var(--text3); }
 
     /* ── Special: sunset ── */
@@ -218,6 +218,81 @@
       border-color: rgba(249,115,22,0.3);
     }
     .card-sunset .card-title { color: var(--sunset); }
+
+    /* ── Card image ── */
+    .card-img {
+      display: block;
+      width: calc(100% + 40px);
+      margin: -20px -20px 16px;
+      height: 210px;
+      object-fit: cover;
+      border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+    }
+    /* Two-image side-by-side for choice cards */
+    .card-img-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: -20px -20px 16px;
+      border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+      overflow: hidden;
+      height: 170px;
+    }
+    .card-img-pair-item {
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img-pair-item + .card-img-pair-item {
+      border-left: 1px solid rgba(255,255,255,0.3);
+    }
+    .card-img-pair-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-img-pair-item span {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      padding: 20px 8px 6px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* ── Photo spot tips ── */
+    .photo-tips {
+      margin-top: 12px;
+      background: var(--anime-bg);
+      border: 1px solid rgba(236,72,153,0.2);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+    }
+    .photo-tips-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--anime);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .photo-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text2);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(236,72,153,0.1);
+      line-height: 1.5;
+    }
+    .photo-tip:last-child { border-bottom: none; padding-bottom: 0; }
+    .photo-tip-icon { flex-shrink: 0; font-size: 14px; }
 
     /* ── Card internals ── */
     .card-header {
@@ -307,19 +382,6 @@
       color: var(--sight);
     }
 
-    /* ── Duration badge ── */
-    .duration {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 12px;
-      color: var(--text3);
-      background: var(--surface2);
-      border-radius: 999px;
-      padding: 3px 10px;
-      margin-top: 8px;
-    }
-
     /* ── Alert ── */
     .alert {
       display: flex;
@@ -344,23 +406,15 @@
     }
     .footer strong { color: var(--text2); }
 
-    /* ── Map link ── */
-    .map-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-      background: var(--accent-bg);
-      border-radius: 999px;
-      padding: 5px 14px;
-      border: 1px solid rgba(99,102,241,0.2);
-      transition: opacity 0.15s;
+    /* ── Image attribution ── */
+    .img-credit {
+      font-size: 10px;
+      color: var(--text3);
+      text-align: right;
+      margin-top: -12px;
+      margin-bottom: 12px;
+      padding-right: 4px;
     }
-    .map-link:hover { opacity: 0.75; }
 
     /* ── Sunset glow animation ── */
     @keyframes glow {
@@ -377,6 +431,15 @@
       .card::before { left: -43px; width: 32px; height: 32px; font-size: 16px; }
       .card { padding: 16px; }
       .card-title { font-size: 15px; }
+      .card-img {
+        width: calc(100% + 32px);
+        margin: -16px -16px 14px;
+        height: 170px;
+      }
+      .card-img-pair {
+        margin: -16px -16px 14px;
+        height: 130px;
+      }
     }
   </style>
 </head>
@@ -411,6 +474,13 @@
 
     <!-- 1. 점심 -->
     <div class="card card-food" data-icon="🍔">
+      <img
+        class="card-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Kamakura_beach.jpg"
+        alt="가마쿠라 해변"
+        loading="lazy"
+      />
+      <p class="img-credit">© Wikimedia Commons</p>
       <div class="card-header">
         <div class="card-meta">
           <div class="card-time">14:00 — 14:50 · 50분</div>
@@ -430,6 +500,25 @@
 
     <!-- 2. 가마쿠라 -->
     <div class="card card-sight" data-icon="⛩️">
+      <div class="card-img-pair">
+        <div class="card-img-pair-item">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Tsurugaoka_Hachimangu_Shrine.JPG"
+            alt="쓰루가오카 하치만구"
+            loading="lazy"
+          />
+          <span>⛩️ 쓰루가오카 하치만구</span>
+        </div>
+        <div class="card-img-pair-item">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Kamakura_Komachi_Street.jpg"
+            alt="코마치 거리"
+            loading="lazy"
+          />
+          <span>🛍️ 코마치 거리</span>
+        </div>
+      </div>
+      <p class="img-credit">© Wikimedia Commons</p>
       <div class="card-header">
         <div class="card-meta">
           <div class="card-time">15:00 — 15:50 · 50분</div>
@@ -452,6 +541,13 @@
 
     <!-- 3. 에노덴 이동 #1 -->
     <div class="card card-transport" data-icon="🚃">
+      <img
+        class="card-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/6/64/Kamakura_Koko_Mae_Station_Enoden.JPG"
+        alt="가마쿠라코코마에역 에노덴"
+        loading="lazy"
+      />
+      <p class="img-credit">© Wikimedia Commons</p>
       <div class="card-header">
         <div class="card-meta">
           <div class="card-time">16:00 — 16:15 · 15분</div>
@@ -471,6 +567,13 @@
 
     <!-- 4. 슬램덩크 -->
     <div class="card card-anime" data-icon="🏀">
+      <img
+        class="card-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Kamakura_High_School_Front_Level_Crossing_%2853149277387%29.jpg"
+        alt="슬램덩크 건널목 가마쿠라고등학교앞"
+        loading="lazy"
+      />
+      <p class="img-credit">© Wikimedia Commons</p>
       <div class="card-header">
         <div class="card-meta">
           <div class="card-time">16:15 — 16:45 · 30분</div>
@@ -483,10 +586,30 @@
         모래사장도 5분 거리 — 잠깐 내려가서 파도 소리 들으며 숨 고르기.
       </p>
       <div class="tips">
-        <div class="tip"><span class="tip-icon">📸</span> 건널목 사진은 열차 통과 타이밍에 맞춰 — 배경이 살아남</div>
         <div class="tip"><span class="tip-icon">🌊</span> 해변은 건널목에서 도보 3분 · 샌들 없어도 OK</div>
         <div class="tip"><span class="tip-icon">⏱️</span> 30분 컷 엄수 — 16:45 출발 지켜야 노을 타임 안전</div>
       </div>
+
+      <div class="photo-tips">
+        <div class="photo-tips-label">📸 사진 스팟 팁</div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">🎯</span>
+          <span><strong>베스트 앵글</strong> — 건널목 건너편 (바다 쪽)에서 섰을 때 배경이 가장 살아남. 역 출구에서 건너편으로 이동 후 촬영.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">🚃</span>
+          <span><strong>에노덴 타이밍</strong> — 열차 지나가는 순간을 배경에 담으면 더 극적. 에노덴은 약 12분 간격 운행. 신호등 내려갈 때가 찬스.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">🌅</span>
+          <span><strong>빛 방향</strong> — 오후 4시대는 서향으로 역광이 생김. 실루엣 사진을 노리거나 건너편에서 순광으로 찍는 게 안전.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">👥</span>
+          <span><strong>혼잡 대비</strong> — 성지 순례 명소라 대기자 많음. 건널목 주변에서 기다리다 빈 타이밍에 재빠르게.</span>
+        </div>
+      </div>
+
       <div class="alert">
         🚨 16:45 넘기면 에노시마 노을 타임 위태로움 — 이 스팟이 타임킬러 주의!
       </div>
@@ -511,6 +634,13 @@
 
     <!-- 6. 에노시마 관광 -->
     <div class="card card-sight" data-icon="🏝️">
+      <img
+        class="card-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/0/07/Enoshima.JPG"
+        alt="에노시마 섬 전경"
+        loading="lazy"
+      />
+      <p class="img-credit">© Wikimedia Commons</p>
       <div class="card-header">
         <div class="card-meta">
           <div class="card-time">17:00 — 18:40 · 1시간 40분</div>
@@ -527,10 +657,46 @@
         <div class="tip"><span class="tip-icon">🔭</span> <strong>전망 포인트</strong> — 후지산 조망 스팟, 맑으면 황금빛 후지 (30분)</div>
         <div class="tip"><span class="tip-icon">💡</span> 이 순서대로 돌면 노을 포인트까지 자연스럽게 연결됨</div>
       </div>
+
+      <div class="photo-tips">
+        <div class="photo-tips-label">📸 사진 스팟 팁</div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">⛩️</span>
+          <span><strong>신사 입구 토리이</strong> — 상점거리 끝, 벤텐 신사 첫 번째 토리이 앞이 정석 사진 스팟. 역광 피해 신사 안쪽에서 바깥을 찍으면 프레임이 살아남.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">🗻</span>
+          <span><strong>전망대 후지산 포인트</strong> — 에노시마 씨캔들(전망 등대) 또는 치고가후치 방면 절벽이 후지산 정면 조망 스팟. 맑은 날 오후 4~5시가 가장 선명.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">🌊</span>
+          <span><strong>치고가후치 절벽</strong> — 서쪽 암초 해안가 수평선 뷰. 파도 + 바위 + 하늘 삼박자. 노을 직전 이 자리로 이동하는 게 핵심.</span>
+        </div>
+      </div>
+
+      <!-- 에노시마 신사 미니 이미지 -->
+      <div style="margin-top:14px; border-radius: var(--radius-sm); overflow:hidden;">
+        <img
+          style="width:100%; height:140px; object-fit:cover; display:block;"
+          src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Enoshima_Shrine_501.jpg"
+          alt="에노시마 신사"
+          loading="lazy"
+        />
+        <p style="font-size:11px; color:var(--text3); padding:4px 6px; background:var(--surface2);">
+          ▲ 에노시마 신사 (辺津宮) · © Wikimedia Commons
+        </p>
+      </div>
     </div>
 
     <!-- 7. 노을 ★★★ -->
     <div class="card card-sunset" data-icon="🌅">
+      <img
+        class="card-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Sunset_in_Enoshima_Island.jpg"
+        alt="에노시마 석양"
+        loading="lazy"
+      />
+      <p class="img-credit">© Wikimedia Commons</p>
       <div class="card-header">
         <div class="card-meta">
           <div class="card-time">18:40 — 19:10 · 30분</div>
@@ -544,10 +710,30 @@
       </p>
       <div class="tips">
         <div class="tip"><span class="tip-icon">📍</span> 에노시마 서쪽 끝 절벽 (치고가후치 洞窟 방면) — 탁 트인 서향 전망</div>
-        <div class="tip"><span class="tip-icon">📸</span> 실루엣 사진은 해 지기 5분 전이 가장 드라마틱</div>
         <div class="tip"><span class="tip-icon">🌤️</span> 흐린 날도 노을빛 하늘은 나옴 — 포기하지 말 것</div>
         <div class="tip"><span class="tip-icon">🌡️</span> 해 지면 바람이 차가워짐 — 걸칠 것 준비</div>
       </div>
+
+      <div class="photo-tips">
+        <div class="photo-tips-label">📸 사진 스팟 팁</div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">📍</span>
+          <span><strong>포인트 이동 타이밍</strong> — 18:10~18:20에 치고가후치 쪽으로 이동 시작. 노을 30분 전엔 자리 확보 필수. 인기 스팟은 금방 채워짐.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">📷</span>
+          <span><strong>실루엣 사진</strong> — 해 지기 5분 전이 가장 드라마틱한 빛. 인물을 해 방향으로 세우고 역광으로 촬영하면 오렌지 실루엣 완성.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">🗻</span>
+          <span><strong>후지산 + 노을</strong> — 맑은 날이면 노을빛에 물드는 후지산을 함께 담을 수 있음. 치고가후치 북서쪽 방향이 후지산 정면. 10월~2월 시야 가장 좋음.</span>
+        </div>
+        <div class="photo-tip">
+          <span class="photo-tip-icon">📱</span>
+          <span><strong>스마트폰 팁</strong> — 노을은 자동 노출이 과다 보정됨. 화면 터치해서 노출 잠금 후 -0.7~-1 EV 보정하면 색이 진하게 나옴.</span>
+        </div>
+      </div>
+
       <div class="alert">
         🌅 이 타임이 오늘의 클라이맥스 — 앞 일정이 밀려도 18:40 이전엔 반드시 도착!
       </div>
@@ -578,6 +764,7 @@
   <div class="footer">
     <p><strong>총 소요 약 5~6시간</strong> · 14:00 출발 기준 노을 타임까지 여유 있음</p>
     <p style="margin-top:8px; font-size:12px;">맑은 날 기준 · 에노덴 혼잡 시 5~10분 여유 추가</p>
+    <p style="margin-top:8px; font-size:11px;">이미지 출처: Wikimedia Commons (CC 라이선스)</p>
   </div>
 
 </div><!-- /content -->
