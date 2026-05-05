@@ -451,16 +451,76 @@
     .dinner-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 14px;
     }
     .dinner-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s, box-shadow 0.15s;
+      border-left: 4px solid var(--food);
     }
-    .dinner-card::before { content: none; }
-    .dinner-card .card-img { height: 140px; }
-    @media (max-width: 600px) {
+    .dinner-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .dinner-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+    .dinner-body { padding: 14px; }
+    .dinner-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .dinner-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .dinner-meta span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text3);
+      background: var(--surface2);
+      border-radius: 6px;
+      padding: 2px 8px;
+    }
+    .dinner-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .dinner-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--food-bg);
+      color: var(--food);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+    .dinner-credit {
+      font-size: 10px;
+      color: var(--text3);
+      text-align: right;
+      padding: 0 14px 10px;
+    }
+    @media (max-width: 480px) {
       .dinner-grid { grid-template-columns: 1fr; }
-      .dinner-card .card-img { height: 180px; }
+      .dinner-img { height: 180px; }
+    }
+    @media (min-width: 481px) and (max-width: 640px) {
+      .dinner-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ── Responsive ── */
@@ -803,82 +863,71 @@
 
   </div><!-- /timeline -->
 
-  <!-- ══ 저녁 추천 메뉴 ══ -->
-  <div style="margin-top: 40px;">
-    <p class="section-label">저녁 추천 메뉴</p>
-    <div class="dinner-grid">
+  <!-- ══ DINNER ══ -->
+  <p class="section-label" style="margin-top: 48px;">저녁 식사 추천</p>
+  <div class="dinner-grid">
 
-      <!-- 시라스동 -->
-      <div class="card card-food dinner-card">
-        <img
-          class="card-img"
-          src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600"
-          alt="시라스동"
-          loading="lazy"
-        />
-        <p class="img-credit">© Wikimedia Commons</p>
-        <div class="card-header" style="margin-bottom:8px;">
-          <div class="card-meta">
-            <div class="card-title" style="font-size:15px;">시라스동
-              <span style="display:block;font-size:12px;font-weight:400;color:var(--text3);">しらす丼</span>
-            </div>
-          </div>
-          <span class="card-badge badge-food">에노시마</span>
+    <!-- 시라스동 -->
+    <div class="dinner-card">
+      <img
+        class="dinner-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shirasu-don.jpg/960px-Shirasu-don.jpg"
+        alt="시라스동"
+        loading="lazy"
+      />
+      <p class="dinner-credit">© peisunmoon / Wikimedia Commons (CC BY-SA 2.0)</p>
+      <div class="dinner-body">
+        <div class="dinner-title">시라스동 (しらす丼)</div>
+        <div class="dinner-meta">
+          <span>💴 ~1,500엔</span>
+          <span>🕐 10:00–19:00</span>
         </div>
-        <p class="card-desc" style="font-size:13px;">에노시마 명물. 생시라스+밥으로 바다의 맛 그대로.</p>
-        <div class="tips">
-          <div class="tip"><span class="tip-icon">🏪</span> 토비초 (とびっちょ) 에노시마본점</div>
-          <div class="tip"><span class="tip-icon">💴</span> ~1,500엔</div>
-          <div class="tip"><span class="tip-icon">🕐</span> 11:00~21:00</div>
-        </div>
+        <p class="dinner-desc">에노시마 명물 치어 덮밥. 생시라스 위에 간장 한 방울이면 완성. 토비초(とびっちょ) 본점이 에노시마 섬 입구 바로 앞.</p>
+        <div class="dinner-tag">🐟 에노시마 명물</div>
       </div>
-
-      <!-- 해산물 정식 -->
-      <div class="card card-food dinner-card">
-        <img
-          class="card-img"
-          src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600"
-          alt="해산물 정식"
-          loading="lazy"
-        />
-        <p class="img-credit">© Wikimedia Commons</p>
-        <div class="card-header" style="margin-bottom:8px;">
-          <div class="card-meta">
-            <div class="card-title" style="font-size:15px;">해산물 정식</div>
-          </div>
-          <span class="card-badge badge-food">섬 입구</span>
-        </div>
-        <p class="card-desc" style="font-size:13px;">에노시마 섬 입구 해산물 레스토랑. 사시미·튀김 정식.</p>
-        <div class="tips">
-          <div class="tip"><span class="tip-icon">📍</span> 에노시마 섬 입구</div>
-          <div class="tip"><span class="tip-icon">💴</span> ~2,000엔</div>
-        </div>
-      </div>
-
-      <!-- 라멘 -->
-      <div class="card card-food dinner-card">
-        <img
-          class="card-img"
-          src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600"
-          alt="라멘"
-          loading="lazy"
-        />
-        <p class="img-credit">© Wikimedia Commons</p>
-        <div class="card-header" style="margin-bottom:8px;">
-          <div class="card-meta">
-            <div class="card-title" style="font-size:15px;">라멘</div>
-          </div>
-          <span class="card-badge badge-food">후지사와</span>
-        </div>
-        <p class="card-desc" style="font-size:13px;">후지사와역 근처. 가볍게 마무리하기 좋은 한 그릇.</p>
-        <div class="tips">
-          <div class="tip"><span class="tip-icon">📍</span> 후지사와역 근처</div>
-          <div class="tip"><span class="tip-icon">💴</span> ~1,000엔</div>
-        </div>
-      </div>
-
     </div>
-  </div>
+
+    <!-- 해산물 정식 -->
+    <div class="dinner-card">
+      <img
+        class="dinner-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Kaisendon_001.jpg/1280px-Kaisendon_001.jpg"
+        alt="해산물 카이센동"
+        loading="lazy"
+      />
+      <p class="dinner-credit">© Wikimedia Commons (CC BY-SA 4.0)</p>
+      <div class="dinner-body">
+        <div class="dinner-title">해산물 정식 (海鮮定食)</div>
+        <div class="dinner-meta">
+          <span>💴 ~2,000엔</span>
+          <span>🕐 11:00–20:00</span>
+        </div>
+        <p class="dinner-desc">에노시마 섬 입구 벤텐나카미세 거리 양쪽으로 해산물 레스토랑 즐비. 구운 조개·새우·회가 세트로 나오는 해산물 정식 추천.</p>
+        <div class="dinner-tag">🦐 에노시마 섬 입구</div>
+      </div>
+    </div>
+
+    <!-- 라멘 -->
+    <div class="dinner-card">
+      <img
+        class="dinner-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Hakata_ramen_bowl_closeup.jpg/960px-Hakata_ramen_bowl_closeup.jpg"
+        alt="라멘"
+        loading="lazy"
+      />
+      <p class="dinner-credit">© Ominae / Wikimedia Commons (CC BY-SA 4.0)</p>
+      <div class="dinner-body">
+        <div class="dinner-title">라멘 (ラーメン)</div>
+        <div class="dinner-meta">
+          <span>💴 ~1,000엔</span>
+          <span>🕐 11:00–22:00</span>
+        </div>
+        <p class="dinner-desc">후지사와역 주변에 로컬 라멘집 다수. 에노덴·오다큐 환승 전 가볍게 한 그릇. 예산 절약하면서 배를 든든히 채울 수 있는 최적 선택.</p>
+        <div class="dinner-tag">🍜 후지사와역 근처</div>
+      </div>
+    </div>
+
+  </div><!-- /dinner-grid -->
 
   <!-- ══ FOOTER ══ -->
   <div class="footer">
